@@ -16,14 +16,27 @@ def banner():
 
 
 def main():
-    class MyPromt(Cmd):
-        prompt = 'Reap Souls'
+
+    class MyPrompt(Cmd):
+        prompt = 'Reap Souls>'
         intro = banner()
 
         def do_exit(self, inp):
             '''exit the application.'''
             print("R.I.P application")
             return True
+
+        def do_add(self, inp):
+            print("Adding '{}'".format(inp))
+
+
+    p = MyPrompt()
+    p.cmdloop()
+
+
+
+
+
 
 
 if __name__ == "__main__":
