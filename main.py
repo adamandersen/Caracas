@@ -1,42 +1,33 @@
-import random
+import random, sys
+from glob import glob
 from cmd import Cmd
-
+from src import core
 # internal modules in use
-from modules_repo.ascii_banners import import_banner
-
-
-
-
-
-def banner():
-    # verbose initalize the module
-    b = import_banner
-    # show random ascii art as header
-    print(b.art[random.randint(0, len(b.art) - 1)])
 
 
 def main():
 
-    class MyPrompt(Cmd):
-        prompt = 'Reap Souls>'
-        intro = banner()
+    core.banner()
+    print("Version: {}".format(core.grap_version))
+    core.show_help_menu()
+    menu_running = 1
+    while[menu_running == 1]:
+        try:
+            take_input = input('prompt:').lower()
+            if take_input == "help":
+                print("This is a quick help in args usage ")
+            if take_input == "banner":
+                core.banner()
+            if take_input == "help" or take_input == "?" or take_input == "h":
+                core.show_help_menu()
+            if take_input == "exit" or take_input == "q" or take_input == "quit":
+                sys.exit()
 
-        def do_exit(self, inp):
-            '''exit the application.'''
-            print("R.I.P application")
-            return True
-
-        def do_add(self, inp):
-            print("Adding '{}'".format(inp))
-
-
-    p = MyPrompt()
-    p.cmdloop()
-
-
-
-
-
+            else:
+                pass
+        except KeyboardInterrupt:
+            print("\nTo hell with this place, I'm out...")
+            sys.exit()
 
 
 if __name__ == "__main__":
